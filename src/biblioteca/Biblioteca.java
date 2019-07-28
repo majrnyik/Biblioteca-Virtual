@@ -8,9 +8,9 @@ import usuario.*;
 
 public class Biblioteca {
 	static Scanner scan = new Scanner(System.in);
-	private static List <Livro> acervo;
-	private static List <Aluno> usuarioAluno;
-	private static List <Professor> usuarioProf;
+	private static List <Livro> acervo;		// lista com livros contidos no acervo
+	private static List <Aluno> usuarioAluno;	// lista de alunos cadastrados na biblioteca
+	private static List <Professor> usuarioProf;	// lista de professores cadastrados na biblioteca
  	
 	// construtor da classe biblioteca
 	public Biblioteca () {
@@ -27,7 +27,7 @@ public class Biblioteca {
 		}		
 	}
 	
-	// metodo para realizar um empréstimo
+	// metodo para realizar um emprÃ©stimo
 	public static void Emprestimo (String title) {
 		for (int i = 0; i < acervo.size(); i++) {
 			if (Livro.getTitulo().equals(title))	
@@ -35,7 +35,7 @@ public class Biblioteca {
 		}
 	}
 	
-	// metodo para realizar uma devolução 
+	// metodo para realizar uma devoluÃ§Ã£o 
 	public static void Devolucao (String title) {
 		for (int i = 0; i < acervo.size(); i++) {
 			if (Livro.getTitulo().equals(title))	
@@ -43,7 +43,7 @@ public class Biblioteca {
 		}
 	}
 	
-	// método para verificar o status de um livro
+	// mÃ©todo para verificar o status de um livro
 	// devolve true se livro estiver disponivel e false se estiver alugado
 	public static boolean buscaStatusLivro (String title) {
 		for (int i = 0; i < acervo.size(); i++) {
@@ -54,9 +54,9 @@ public class Biblioteca {
 		return false;
 	}
 	
-	// método para cadastrar livro
+	// mÃ©todo para cadastrar livro
 	public static void cadastraLivro () {
-			System.out.println("Digite o título, assunto, autores e ano do livro.");
+			System.out.println("Digite o tÃ­tulo, assunto, autores e ano do livro.");
 			String titulo = scan.nextLine();
 			String assunto = scan.nextLine();
 			String autor = scan.nextLine();
@@ -65,14 +65,14 @@ public class Biblioteca {
 			acervo.add(l);
 	}
 	
-	// método para remover um livro do acervo
+	// mÃ©todo para remover um livro do acervo
 	public static void removeLivro (String title) {
 		for (int i = 0; i < acervo.size(); i++) 
 			if (Livro.titulo.equals(title))	
 				acervo.remove(i);
 	}
 	
-	// método para buscar histórico de aluno
+	// mÃ©todo para buscar histÃ³rico de aluno
 	public static void buscaHistoricoAluno (int iD, int senha) {
 		for (int i = 0; i < usuarioAluno.size(); i++) {
 			if (Aluno.getiD() == iD && Aluno.getSenha() == senha)	
@@ -80,7 +80,7 @@ public class Biblioteca {
 		}
 	}
 	
-	// método para buscar histórico de professor
+	// mÃ©todo para buscar histÃ³rico de professor
 	public static void buscaHistoricoProf (int iD, int senha) {
 		for (int i = 0; i < usuarioProf.size(); i++) {
 			if (Aluno.getiD() == iD && Aluno.getSenha() == senha)	
@@ -88,6 +88,7 @@ public class Biblioteca {
 		}
 	}
 	
+	// mÃ©todo para realizar o cadastro de um usuÃ¡rio do tipo aluno
 	public static void cadastraAluno () {
 		System.out.println("Digite o nome, sobrenome, email e nova senha.");
 		String nome = scan.nextLine();
@@ -98,6 +99,7 @@ public class Biblioteca {
 		usuarioAluno.add(a);
 	}
 	
+	// mÃ©todo para realizar o cadastro de um usuÃ¡rio do tipo professor
 	public static void cadastraProfessor () {
 		System.out.println("Digite o nome, sobrenome, email e nova senha.");
 		String nome = scan.nextLine();
