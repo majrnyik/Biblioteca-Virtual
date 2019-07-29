@@ -83,8 +83,8 @@ public class Biblioteca {
 	// método para buscar histórico de professor
 	public static void buscaHistoricoProf (int iD, int senha) {
 		for (int i = 0; i < usuarioProf.size(); i++) {
-			if (Aluno.getiD() == iD && Aluno.getSenha() == senha)	
-				System.out.println(Aluno.getHistorico());
+			if (Professor.getiD() == iD && Professor.getSenha() == senha)	
+				System.out.println(Professor.getHistorico());
 		}
 	}
 	
