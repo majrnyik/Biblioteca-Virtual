@@ -7,7 +7,12 @@ public class Principal {
 	public static void main (String[] args) {
 		int type1, type2 = 10;
 		String titulo;
+		Biblioteca biblioteca = new Biblioteca ();
+		
 		Scanner scan = new Scanner(System.in);
+		
+		
+		
 		
 		System.out.println("----------	Bem vindo!	----------");
 		System.out.println("Digite seu perfil: ");
@@ -29,23 +34,34 @@ public class Principal {
 					type2 = scan.nextInt();
 					switch (type2) {
 						case 1:
-							System.out.println("Digite o nome do livro a ser procurado.");
+							System.out.println("Digite o nome do livro a ser procurado. \n");
+							scan.nextLine();
 							titulo = scan.nextLine();
 							Biblioteca.buscaLivro(titulo);
+							break;
 						case 2:
-							System.out.println("Digite o seu iD e senha.");
-								int iD = scan.nextInt(); int senha = scan.nextInt();
+							System.out.println("Digite o seu iD e senha.\n");
+							scan.nextLine();
+							int iD = scan.nextInt();
+							scan.nextLine();
+							int senha = scan.nextInt();
 							Aluno.buscaHistoricoAluno(iD,senha);
+							break;
 						case 3:
-							System.out.println("Digite o nome do livro a ser alugado.");
+							System.out.println("Digite o nome do livro a ser alugado.\n");
+							scan.nextLine();
 							titulo = scan.nextLine();
 							Aluno.realizaEmprestimo(titulo);
+							break;
 						case 4:
-							System.out.println("Digite o nome do livro a ser devolvido.");
+							System.out.println("Digite o nome do livro a ser devolvido.\n");
+							scan.nextLine();
 							titulo = scan.nextLine();
 							Aluno.realizaDevolucao(titulo);
+							break;
 						case 5:
-							Aluno.cadastraAluno();		
+							Aluno.cadastraAluno();
+							break;
 					}
 			
 				case 2:
@@ -59,23 +75,34 @@ public class Principal {
 					type2 = scan.nextInt();
 					switch (type2) {
 						case 1:
-							System.out.println("Digite o nome do livro a ser procurado.");
+							System.out.println("Digite o nome do livro a ser procurado.\n");
+							scan.nextLine();
 							titulo = scan.nextLine();
 							Biblioteca.buscaLivro(titulo);
+							break;
 						case 2:
-							System.out.println("Digite o seu iD e senha.");
-							int iD = scan.nextInt(); int senha = scan.nextInt();
+							System.out.println("Digite o seu iD e senha.\n");
+							scan.nextLine();
+							int iD = scan.nextInt();
+							scan.nextLine();
+							int senha = scan.nextInt();
 							Professor.buscaHistoricoProf(iD,senha);
+							break;
 						case 3:
-							System.out.println("Digite o nome do livro a ser alugado.");
+							System.out.println("Digite o nome do livro a ser alugado.\n");
+							scan.nextLine();
 							titulo = scan.nextLine();
 							Professor.realizaEmprestimo(titulo);
+							break;
 						case 4:
-							System.out.println("Digite o nome do livro a ser devolvido.");
+							System.out.println("Digite o nome do livro a ser devolvido.\n");
+							scan.nextLine();
 							titulo = scan.nextLine();
 							Professor.realizaDevolucao(titulo);
+							break;
 						case 5:
 							Professor.cadastraProfessor();
+							break;
 						
 					}
 				case 3:
@@ -87,15 +114,20 @@ public class Principal {
 					type2 = scan.nextInt();
 					switch (type2) {
 						case 1:
-							System.out.println("Digite o nome do livro a ser procurado.");
+							System.out.println("Digite o nome do livro a ser procurado.\n");
+							scan.nextLine();
 							titulo = scan.nextLine();
 							Biblioteca.buscaLivro(titulo);
+							break;
 						case 2:
 							Bibliotecario.cadastraLivro();
+							break;
 						case 3:
-							System.out.println("Digite o nome do livro a ser procurado.");
+							System.out.println("Digite o nome do livro a ser procurado.\n");
+							scan.nextLine();
 							titulo = scan.nextLine();
 							Bibliotecario.removeLivro(titulo);
+							break;
 					}
 				}
 			}	

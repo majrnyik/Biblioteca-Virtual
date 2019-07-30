@@ -10,8 +10,8 @@ public class ComprovanteEmprestimo extends Comprovante {
 	
 	@Override
 	public String toString () {
-		return "---------- Empréstimo realizado com sucessso ----------!" 
-				+ "Descrição:  " + getTitulo() + "\n" 
+		return "---------- Empréstimo realizado com sucessso! ----------" 
+				+ "Título:  " + getTitulo() + "\n" 
 				+ "Data de empréstimo: " + getDataEmprestimo() + "\n"
 				+ "Prazo de devolução: " + getDataPrevista() + "\n";
 	}

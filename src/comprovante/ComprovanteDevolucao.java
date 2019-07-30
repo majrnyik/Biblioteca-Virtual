@@ -9,8 +9,8 @@ public class ComprovanteDevolucao extends Comprovante {
 	
 	@Override
 	public String toString () {
-		return "---------- Devolução realizada com sucessso ----------!" 
-				+ "Descrição:  " + getTitulo() + "\n" 
+		return "---------- Devolução realizada com sucessso! ----------" 
+				+ "Título:  " + getTitulo() + "\n" 
 				+ "Data de empréstimo: " + getDataEmprestimo() + "\n"
 				+ "Data de devolução: " + getDataDevolucao() + "\n";
 	}

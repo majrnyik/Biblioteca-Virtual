@@ -20,7 +20,8 @@ public class Bibliotecario extends Usuario {
 		String autor = scan.nextLine();
 		int ano = scan.nextInt();
 		Livro l = new Livro(titulo, assunto, autor, ano);
-		Biblioteca.getAcervo().add(l);
+		Biblioteca.acervo.add(l);
+		System.out.println("Livro cadastrado com sucesso!");
 	}
 	
 	//método para remover um livro

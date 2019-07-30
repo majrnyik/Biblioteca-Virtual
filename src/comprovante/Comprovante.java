@@ -15,7 +15,7 @@ public class Comprovante {
 	}
 	
 	public String toString () {
-		return  "Descrição:  " + getTitulo() + "\n" 
+		return  "Título:  " + getTitulo() + "\n" 
 				+ "Data de empréstimo: " + getDataEmprestimo() + "\n"
 				+ "Data de devolução: " + getDataDevolucao() + "\n";
 	}

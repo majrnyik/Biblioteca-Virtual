@@ -14,9 +14,9 @@ public class Biblioteca {
  	
 	// construtor da classe biblioteca
 	public Biblioteca () {
-		new ArrayList<Livro>();
-		new ArrayList <Aluno>();
-		new ArrayList <Professor>();
+		setAcervo(new ArrayList<Livro>());
+		setUsuarioAluno(new ArrayList <Aluno>());
+		setUsuarioProf(new ArrayList <Professor>());
 	}
 	
 	// metodo auxiliar para realizar um empréstimo
@@ -40,7 +40,8 @@ public class Biblioteca {
 		for (int i = 0; i < acervo.size(); i++) {
 			if (Livro.getTitulo().equals(title))	
 				System.out.println(acervo.get(i));
-		}		
+		}
+		System.out.println("Livro não encontrado!");
 	}
 	
 	// método para verificar o status de um livro
@@ -52,7 +53,8 @@ public class Biblioteca {
 					return true;
 		}
 		return false;
-	}	
+	}
+	
 	
 	/*------------------------- getters e setters -----------------------------*/
 	
