@@ -2,12 +2,12 @@ package livros;
 
 public class Livro {
 	
-	public static String titulo; 				// titulo do livro
-	public String assunto; 						// assunto do livro 
-	public String autor; 						// autores do livro
-	public int nChamada;						// numero de chamada do livro
+	public static String titulo; 			// titulo do livro
+	public String assunto; 				// assunto do livro 
+	public String autor; 				// autores do livro
+	public int nChamada;				// numero de chamada do livro
 	public static int nChamadaUniversal = 0; 	// ultimo numero de chamada
-	public int ano; 							// ano de publicação
+	public int ano; 				// ano de publicaÃ§Ã£o
 	public static int status;
 
 	// construtor da classe abstrata Livro
