@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import usuario.*;
 import biblioteca.*;
+
 public class Principal {
 	
 	public static void main (String[] args) {
@@ -8,7 +9,7 @@ public class Principal {
 		String titulo;
 		Scanner scan = new Scanner(System.in);
 		
-		System.out.println("Bem vindo!");
+		System.out.println("----------	Bem vindo!	----------");
 		System.out.println("Digite seu perfil: ");
 		System.out.println("1: Professor.\n"
 				+ "2: Aluno.\n"
@@ -22,7 +23,7 @@ public class Principal {
 					System.out.println("1: Procurar livro.\n"
 							+ "2: Verificar meu histórico.\n"
 							+ "3: Alugar um livro.\n"
-							+ "4: Devolver um livro."
+							+ "4: Devolver um livro.\n"
 							+ "5: Fazer cadastro.\n"
 							+ "Pressione '0' para sair.");
 					type2 = scan.nextInt();
@@ -52,7 +53,7 @@ public class Principal {
 					System.out.println("1: Procurar livro.\n"
 							+ "2: Verificar meu histórico.\n"
 							+ "3: Alugar um livro.\n"
-							+ "4: Devolver um livro."
+							+ "4: Devolver um livro.\n"
 							+ "5: Fazer cadastro.\n"
 							+ "Pressione '0' para sair.");
 					type2 = scan.nextInt();

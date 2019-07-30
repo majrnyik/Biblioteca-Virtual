@@ -1,12 +1,12 @@
 package usuario;
 
 public abstract class Usuario {
-	private String Nome; 			// nome do usuario
-	private String Sobrenome; 		// sobrenome do usuario
-	private String Email;			// e-mail do usuario
-	private static int iD;			// n√∫mero de identifica√ß√£o do usu√°rio
-	private static int senha;		// senha do usu√°rio
-	private static int iDUniversal = 0; 	// vari√°vel auxiliar para cria√ß√£o de um iD
+	private String Nome; 					// nome do usuario
+	private String Sobrenome; 				// sobrenome do usuario
+	private String Email;					// e-mail do usuario
+	private static int iD;							// n˙mero de identificaÁ„o do usu·rio
+	private static int senha;						// senha do usu·rio
+	private static int iDUniversal = 0; 	// vari·vel auxiliar para criaÁ„o de um iD
 	
 	//construtor da classe abstrata usuario
 	public Usuario (String Nome, String Sobrenome, String Email, int senha) {
@@ -17,7 +17,7 @@ public abstract class Usuario {
 		setSenha(senha);
 	}
 	
-	/* -------- fun√ß√µes getters e setters -------- */
+	/* -------- funÁıes getters e setters -------- */
 	
 	public String getNome() {
 		return Nome;
