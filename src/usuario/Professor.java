@@ -1,48 +1,29 @@
 package usuario;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import biblioteca.Biblioteca;
+import biblioteca.*;
+import comprovante.*;
 
 public class Professor extends Usuario {
+																			// histórico de locações
+	static int qtdMax = 10;													// quantidade máxima de livros que um professor pode alugar
+	static int prazoMax = 90;												// data máxima que um livro pode ser alugado por um professor
+	static LocalDate dataEmprestimo = LocalDate.now();						// calcula o dia de hoje
+	static LocalDate dataPrevista = dataEmprestimo.plusDays(prazoMax);		// calcula o prazo de devolução
+	static LocalDate dataDevolucao = LocalDate.now();						// calcula a data de devolução baseado na data atual
 	
-	private static List <String> historico;	// histórico de locações
-	static int qtdMax = 10;					// quantidade máxima de livros que um professor pode alugar
-	static int prazoMax = 90;				// data máxima que um livro pode ser alugado por um professor
 	static Scanner scan = new Scanner(System.in);
 	
 	//construtor da classe professor
 	public Professor (String nome, String sobrenome, String email, int senha) {
 		super (nome, sobrenome, email, senha);
-		setHistorico(new ArrayList<String>());
+		setHistorico(new ArrayList<Comprovante>());
 	}
 	
-	//metodo para realizar emprestimos
-	public static void realizaEmprestimo (String titulo) {
-		// se o limite de livros ainda n for atigido	
-		if (qtdMax > 0) {
-			// se o livro estiver disponivel					
-			if( Biblioteca.buscaStatusLivro(titulo)) { 
-			Biblioteca.Emprestimo(titulo);
-			historico.add(titulo);
-			System.out.println("Empréstimo realizado com sucesso!");
-			qtdMax--;
-		}
-		else
-			System.out.println("Livro já está alugado. Impossível realizar empréstimo.");
-		}
-		else 
-			System.out.println("Você atingiu o limite para a locação de livros. "
-					+ "Devolva um livro e tente novamente");
-	}
-	
-	// metodo para realizar a devolucao
-	public static void realizaDevolucao (String titulo) {
-		Biblioteca.Devolucao(titulo);
-	}
-	
+	// metodo para cadastrar um professor
 	public static void cadastraProfessor () {
 		System.out.println("Digite o nome, sobrenome, email e nova senha.");
 		String nome = scan.nextLine();
@@ -57,16 +38,8 @@ public class Professor extends Usuario {
 	public static void buscaHistoricoProf (int iD, int senha) {
 		for (int i = 0; i < Biblioteca.getUsuarioProf().size(); i++) {
 			if (Professor.getiD() == iD && Professor.getSenha() == senha)	
-				System.out.println(Professor.getHistorico());
+				System.out.print(Professor.getHistorico());
 		}
-	}
-	
-	public static void setHistorico(List<String> historico) {
-		Professor.historico = historico;
-	}
-	
-	public static List<String> getHistorico() {
-		return historico;
 	}
 }
 
