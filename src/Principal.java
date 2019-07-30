@@ -35,7 +35,7 @@ public class Principal {
 						case 2:
 							System.out.println("Digite o seu iD e senha.");
 								int iD = scan.nextInt(); int senha = scan.nextInt();
-							Biblioteca.buscaHistoricoAluno(iD,senha);
+							Aluno.buscaHistoricoAluno(iD,senha);
 						case 3:
 							System.out.println("Digite o nome do livro a ser alugado.");
 							titulo = scan.nextLine();
@@ -45,7 +45,7 @@ public class Principal {
 							titulo = scan.nextLine();
 							Aluno.realizaDevolucao(titulo);
 						case 5:
-							Biblioteca.cadastraAluno();		
+							Aluno.cadastraAluno();		
 					}
 			
 				case 2:
@@ -65,7 +65,7 @@ public class Principal {
 						case 2:
 							System.out.println("Digite o seu iD e senha.");
 							int iD = scan.nextInt(); int senha = scan.nextInt();
-							Biblioteca.buscaHistoricoProf(iD,senha);
+							Professor.buscaHistoricoProf(iD,senha);
 						case 3:
 							System.out.println("Digite o nome do livro a ser alugado.");
 							titulo = scan.nextLine();
@@ -75,7 +75,7 @@ public class Principal {
 							titulo = scan.nextLine();
 							Professor.realizaDevolucao(titulo);
 						case 5:
-							Biblioteca.cadastraProfessor();
+							Professor.cadastraProfessor();
 						
 					}
 				case 3:
@@ -91,11 +91,11 @@ public class Principal {
 							titulo = scan.nextLine();
 							Biblioteca.buscaLivro(titulo);
 						case 2:
-							Biblioteca.cadastraLivro();
+							Bibliotecario.cadastraLivro();
 						case 3:
 							System.out.println("Digite o nome do livro a ser procurado.");
 							titulo = scan.nextLine();
-							Biblioteca.removeLivro(titulo);
+							Bibliotecario.removeLivro(titulo);
 					}
 				}
 			}	

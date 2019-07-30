@@ -1,5 +1,6 @@
 package usuario;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.List;
 import biblioteca.*;
 
@@ -8,6 +9,7 @@ public class Aluno extends Usuario {
 	private static List <String> historico;	// histórico de locações
 	static int  qtdMax = 5; 				// quantidade máxima de livros que um aluno pode alugar
 	static int prazoMax = 30;				// data máxima que um livro pode ser alugado por um aluno
+	static Scanner scan = new Scanner(System.in);
 	
 	//construtor da classe aluno 
 	public Aluno (String nome, String sobrenome, String email, int senha) {
@@ -38,6 +40,28 @@ public class Aluno extends Usuario {
 	public static void realizaDevolucao (String titulo) {
 		Biblioteca.Devolucao(titulo);
 	}
+	
+	//metodo para o aluno fazer cadastro
+	public static void cadastraAluno () {
+		System.out.println("Digite o nome, sobrenome, email e nova senha.");
+		String nome = scan.nextLine();
+		String sobrenome = scan.nextLine();
+		String email = scan.nextLine();
+		int senha = scan.nextInt();
+		Aluno a = new Aluno(nome, sobrenome, email, senha);
+		Biblioteca.getUsuarioAluno().add(a);
+	}
+	
+	// método para buscar histórico de aluno
+		public static void buscaHistoricoAluno (int iD, int senha) {
+			for (int i = 0; i < Biblioteca.getUsuarioAluno().size(); i++) {
+				if (Aluno.getiD() == iD && Aluno.getSenha() == senha)	
+					System.out.println(Aluno.getHistorico());
+			}
+		}
+	
+	
+	
 	
 	public static void setHistorico(List<String> historico) {
 		Aluno.historico = historico;
