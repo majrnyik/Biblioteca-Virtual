@@ -117,6 +117,40 @@ public class Biblioteca {
 		}
 	}
 
+	//metodo para o aluno fazer cadastro
+	public void cadastroAluno () {
+		System.out.println("Digite o nome, sobrenome, iD e nova senha.");
+		String nome = Biblioteca.scan.nextLine();
+		String sobrenome = Biblioteca.scan.nextLine();
+		int iD = Biblioteca.scan.nextInt();
+		int senha = Biblioteca.scan.nextInt();
+		Aluno a = new Aluno(nome, sobrenome, iD, senha);
+		Biblioteca.getUsuarioAluno().add(a);
+	}
+
+	// metodo para cadastrar um professor
+	public void cadastroProfessor () {
+		System.out.println("Digite o nome, sobrenome, iD e nova senha.");
+		String nome = Biblioteca.scan.nextLine();
+		String sobrenome = Biblioteca.scan.nextLine();
+		int iD = Biblioteca.scan.nextInt();
+		int senha = Biblioteca.scan.nextInt();
+		Professor p = new Professor(nome, sobrenome, iD, senha);
+		Biblioteca.getUsuarioProf().add(p);
+	}
+
+	// metodo para cadastrar um professor
+	public void cadastroTA () {
+		System.out.println("Digite o nome, sobrenome, iD e nova senha.");
+		String nome = Biblioteca.scan.nextLine();
+		String sobrenome = Biblioteca.scan.nextLine();
+		int iD = Biblioteca.scan.nextInt();
+		int senha = Biblioteca.scan.nextInt();
+		Bibliotecario b = new Bibliotecario(nome, sobrenome, iD, senha);
+		Biblioteca.getUsuarioTA().add(b);
+	}
+
+
 
 	/*------------------------- getters e setters -----------------------------*/
 

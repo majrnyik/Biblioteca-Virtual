@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import biblioteca.Biblioteca;
 import comprovante.Comprovante;
 
 public class Professor extends Usuario {
@@ -18,23 +17,13 @@ public class Professor extends Usuario {
 	public static Scanner scan = new Scanner(System.in);
 
 	//construtor da classe professor
-	public Professor (final String nome, final String sobrenome, final int senha) {
-		super (nome, sobrenome, senha);
+	public Professor (final String nome, final String sobrenome, final int iD, final int senha) {
+		super (nome, sobrenome, iD, senha);
 		this.setHistorico(new ArrayList<Comprovante>());
 	}
 
 	public Professor () {
 
-	}
-
-	// metodo para cadastrar um professor
-	public void cadastraProfessor () {
-		System.out.println("Digite o nome, sobrenome, email e nova senha.");
-		String nome = Professor.scan.nextLine();
-		String sobrenome = Professor.scan.nextLine();
-		int senha = Professor.scan.nextInt();
-		Professor p = new Professor(nome, sobrenome, senha);
-		Biblioteca.getUsuarioProf().add(p);
 	}
 }
 

@@ -15,7 +15,6 @@ public abstract class  Usuario {
 	private String sobrenome; 											// sobrenome do usuario
 	private int iD;														// número de identificação do usuário
 	private int senha;													// senha do usuário
-	private static int iDUniversal = 0; 								// variável auxiliar para criação de um iD
 	private int  qtdMax; 												// quantidade máxima de livros para locação por usuário
 	private int prazoMax;												// data máxima que um livro pode ser alugado
 	private LocalDate dataEmprestimo = LocalDate.now();					// calcula o dia de hoje
@@ -24,10 +23,10 @@ public abstract class  Usuario {
 	private LocalDate dataDevolucao = LocalDate.now();
 
 	//construtor da classe abstrata usuario
-	public Usuario (final String nome, final String sobrenome, final int senha) {
+	public Usuario (final String nome, final String sobrenome,final int iD, final int senha) {
 		this.setNome(nome);
+		this.setiD(iD);
 		this.setSobrenome(sobrenome);
-		this.setiD(Usuario.iDUniversal++);
 		this.setSenha(senha);
 		this.setHistorico(new ArrayList<Comprovante>());
 	}
@@ -118,14 +117,6 @@ public abstract class  Usuario {
 
 	public void setSenha(final int senha) {
 		this.senha = senha;
-	}
-
-	public static int getiDUniversal() {
-		return Usuario.iDUniversal;
-	}
-
-	public static void setiDUniversal(final int iDUniversal) {
-		Usuario.iDUniversal = iDUniversal;
 	}
 
 	public int getQtdMax() {

@@ -8,8 +8,8 @@ public class Bibliotecario extends Usuario {
 	static Scanner scan = new Scanner(System.in);
 
 	//construtor da classe bibliotecario
-	public Bibliotecario (final String nome, final String sobrenome, final String email, final int senha) {
-		super (nome, sobrenome, senha);
+	public Bibliotecario (final String nome, final String sobrenome, final int iD, final int senha) {
+		super (nome, sobrenome, iD, senha);
 	}
 
 	public Bibliotecario () {
