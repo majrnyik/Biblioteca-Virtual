@@ -6,9 +6,7 @@ import usuario.Bibliotecario;
 import usuario.Professor;
 
 public class Principal {
-
-
-
+	
 	public static void main(final String[] args) {
 		int type1;
 		int type2 = 10;
