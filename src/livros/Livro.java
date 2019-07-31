@@ -1,86 +1,88 @@
 package livros;
 
 public class Livro {
-	
-	public static String titulo; 				// titulo do livro
-	public String assunto; 						// assunto do livro 
-	public String autor; 						// autores do livro
-	public int nChamada;						// numero de chamada do livro
-	public static int nChamadaUniversal = 0; 	// ultimo numero de chamada
-	public int ano; 							// ano de publicação
-	public static int status;
+
+	private String titulo; 				// titulo do livro
+	private String assunto; 						// assunto do livro
+	private String autor; 						// autores do livro
+	private int nChamada;						// numero de chamada do livro
+	private static int nChamadaUniversal = 0; 	// ultimo numero de chamada
+	private int ano; 							// ano de publicação
+	private int status;
 
 	// construtor da classe abstrata Livro
-	public Livro(String titulo, String assunto, String autor, int ano) {
-		setTitulo(titulo);
-		this.assunto = assunto;
+	public Livro(final String titulo, final String assunto, final String autor, final int ano) {
+		this.setTitulo(titulo);
+		this.setAssunto(assunto);
 		this.autor = autor;
 		this.ano = ano;
-		this.nChamada = nChamadaUniversal++; 	//a cada cadastro o numero de chamada aumenta +1
-		setStatus(0);
+		this.nChamada = Livro.nChamadaUniversal++; 	//a cada cadastro o numero de chamada aumenta +1
+		this.setStatus(0);
 	}
-	
+
 	@Override
 	public String toString () {
-		return "Título: " + getTitulo() + "\n"
-			+ "Assunto: " + getAssunto() + "\n"
-			+ "Autor: "  + getAutor() + "\n"
-			+ "Ano de publicação: "	+ getAno() + "\n";
+		return "Título: " + this.getTitulo() + "\n"
+				+ "Assunto: " + this.getAssunto() + "\n"
+				+ "Autor: "  + this.getAutor() + "\n"
+				+ "Ano de publicação: "	+ this.getAno() + "\n";
+	}
+
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+	public void setTitulo(final String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getAssunto() {
-		return assunto;
+		return this.assunto;
 	}
 
-	public void setAssunto(String assunto) {
+	public void setAssunto(final String assunto) {
 		this.assunto = assunto;
 	}
 
 	public String getAutor() {
-		return autor;
+		return this.autor;
 	}
 
-	public void setAutor(String autor) {
+	public void setAutor(final String autor) {
 		this.autor = autor;
 	}
 
 	public int getnChamada() {
-		return nChamada;
+		return this.nChamada;
 	}
 
-	public void setnChamada(int nChamada) {
+	public void setnChamada(final int nChamada) {
 		this.nChamada = nChamada;
 	}
 
 	public static int getnChamadaUniversal() {
-		return nChamadaUniversal;
+		return Livro.nChamadaUniversal;
 	}
 
-	public static void setnChamadaUniversal(int nChamadaUniversal) {
+	public static void setnChamadaUniversal(final int nChamadaUniversal) {
 		Livro.nChamadaUniversal = nChamadaUniversal;
 	}
 
 	public int getAno() {
-		return ano;
+		return this.ano;
 	}
 
-	public void setAno(int ano) {
+	public void setAno(final int ano) {
 		this.ano = ano;
 	}
 
-	public static int getStatus() {
-		return status;
+	public int getStatus() {
+		return this.status;
 	}
 
-	public static void setStatus(int status) {
-		Livro.status = status;
+	public void setStatus(final int status) {
+		this.status = status;
 	}
 
-	public static String getTitulo() {
-		return titulo;
-	}
 
-	public static void setTitulo(String titulo) {
-		Livro.titulo = titulo;
-	}
 }

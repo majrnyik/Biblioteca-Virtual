@@ -3,29 +3,15 @@ import java.time.LocalDate;
 public class ComprovanteDevolucao extends Comprovante {
 
 	// construtor da classe ComprovanteDevolucao
-	public ComprovanteDevolucao (String titulo, LocalDate dataEmprestimo, LocalDate dataPrevista) {
+	public ComprovanteDevolucao (final String titulo, final LocalDate dataEmprestimo, final LocalDate dataPrevista) {
 		super (titulo, dataEmprestimo, dataPrevista, LocalDate.now());
 	}
-	
+
 	@Override
 	public String toString () {
-		return "---------- Devolução realizada com sucessso! ----------" 
-				+ "Título:  " + getTitulo() + "\n" 
-				+ "Data de empréstimo: " + getDataEmprestimo() + "\n"
-				+ "Data de devolução: " + getDataDevolucao() + "\n";
-	}
-	
-	/*------------------------- getters e setters -----------------------------*/
-	
-	static public String getTitulo() {
-		return titulo;
-	}
-	
-	static public LocalDate getDataEmprestimo() {
-		return dataEmprestimo;
-	}
-
-	public LocalDate getDataDevolucao() {
-		return dataDevolucao;
+		return "---------- Devolução realizada com sucessso! ----------"
+				+ "Título:  " + this.getTitulo() + "\n"
+				+ "Data de empréstimo: " + this.getDataEmprestimo() + "\n"
+				+ "Data de devolução: " + this.getDataDevolucao() + "\n";
 	}
 }

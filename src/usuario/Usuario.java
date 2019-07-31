@@ -3,62 +3,65 @@ package usuario;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import biblioteca.*;
-import comprovante.*;
 
-	public abstract class Usuario {
-	private static List <Comprovante> historico;							// histórico de empéstimos do usuário
-	private String Nome; 													// nome do usuario
-	private String Sobrenome; 												// sobrenome do usuario
-	private String Email;													// e-mail do usuario
-	private static int iD;													// número de identificação do usuário
-	private static int senha;												// senha do usuário
+import biblioteca.Biblioteca;
+import comprovante.Comprovante;
+import comprovante.ComprovanteDevolucao;
+import comprovante.ComprovanteEmprestimo;
+
+public abstract class  Usuario {
+	private List <Comprovante> historico;							// histórico de empéstimos do usuário
+	private String nome; 											// nome do usuario
+	private String sobrenome; 										// sobrenome do usuario
+	private int iD;													// número de identificação do usuário
+	private int senha;												// senha do usuário
 	private static int iDUniversal = 0; 									// variável auxiliar para criação de um iD
-	static int  qtdMax; 													// quantidade máxima de livros para locação por usuário
-	static int prazoMax;													// data máxima que um livro pode ser alugado
-	static LocalDate dataEmprestimo = LocalDate.now();						// calcula o dia de hoje
-	static LocalDate dataPrevista = dataEmprestimo.plusDays(prazoMax);		// calcula a data de devolução baseado na data atual
-	static LocalDate dataDevolucao = LocalDate.now();
-	
+	private int  qtdMax; 													// quantidade máxima de livros para locação por usuário
+	private int prazoMax;													// data máxima que um livro pode ser alugado
+	private LocalDate dataEmprestimo = LocalDate.now();						// calcula o dia de hoje
+	private LocalDate dataPrevista = this.getDataEmprestimo().plusDays(this.getPrazoMax());		// calcula a data de devolução baseado na data atual
+	private LocalDate dataDevolucao = LocalDate.now();
+
 	//construtor da classe abstrata usuario
-	public Usuario (String Nome, String Sobrenome, String Email, int senha) {
-		this.Nome = Nome;
-		this.Sobrenome = Sobrenome;
-		this.Email = Email;
-		setiD(iDUniversal++);
-		setSenha(senha);
-		setHistorico(new ArrayList<Comprovante>());
+	public Usuario (final String nome, final String sobrenome, final int senha) {
+		this.setNome(nome);
+		this.setSobrenome(sobrenome);
+		this.setiD(Usuario.iDUniversal++);
+		this.setSenha(senha);
+		this.setHistorico(new ArrayList<Comprovante>());
 	}
-	
+
+	public Usuario () {
+
+	}
+
 	// método para realizar empréstimo
-	public static void realizaEmprestimo (String titulo) {
+	public void realizaEmprestimo (final String titulo) {
 		// se o limite de livros ainda não for atigido
-		if (qtdMax > 0) {	
-			// se o livro estiver disponivel				
-			if( Biblioteca.buscaStatusLivro(titulo)) {   
-			Biblioteca.Emprestimo(titulo);
+		if (this.getQtdMax() > 0) {
+			// se o livro estiver disponivel
+			Biblioteca.emprestimo(titulo);
 			// cria comprovante de empréstimo e coloca no histórico do usuário
-			ComprovanteEmprestimo c = new ComprovanteEmprestimo (titulo, dataEmprestimo, dataPrevista);
-			historico.add(c);
+			ComprovanteEmprestimo c = new ComprovanteEmprestimo (titulo, this.getDataEmprestimo(), this.getDataPrevista());
+			this.getHistorico().add(c);
 			System.out.print(c);
 			// diminui em 1 a quantidade possíveis futuros empréstimos
-			qtdMax--;
-			}
-			else
-				System.out.println("Livro já está alugado. Impossível realizar empréstimo.");
+			int qtdNova = this.getQtdMax();
+			this.setQtdMax(qtdNova);
+		} else {
+			System.out.println("Você atingiu o limite para a locação de livros.\n "
+					+ "Devolva um livro e tente novamente");
 		}
-		else 
-			System.out.println("Você atingiu o limite para a locação de livros. "
-								+ "Devolva um livro e tente novamente");
 	}
-		
-	// método para realizar a devolução 
-	public static void realizaDevolucao (String titulo) {
-		Biblioteca.Devolucao(titulo);
-	
+
+	// método para realizar a devolução
+	public static void realizaDevolucao (final String titulo) {
+		Biblioteca.devolucao(titulo);
+
 		// resgata datas de empréstimo e previsão de devolução
-		LocalDate emprest = null, previsao =  null;
-		for (int i = 0; i < historico.size(); i++) {
+		LocalDate emprest = null;
+		LocalDate previsao =  null;
+		for (int i = 0; i < this.getHistorico().size(); i++) {
 			if (Comprovante.getTitulo().equals(titulo))	{
 				emprest = Comprovante.getDataEmprestimo();
 				previsao = Comprovante.getDataPrevista();
@@ -67,49 +70,102 @@ import comprovante.*;
 		// cria comprovante de devolução
 		ComprovanteDevolucao c = new ComprovanteDevolucao(titulo, emprest, previsao);
 		System.out.print(c);
-		
+
 		// se a data de devolução for após a data prevista:
-		if (dataDevolucao.isAfter(previsao)) {
-				System.out.print("Atenção! Devolução atrasada, você está bloqueado por 7 dias.");	
+		if (Usuario.getDataDevolucao().isAfter(previsao)) {
+			System.out.print("Atenção! Devolução atrasada, você está bloqueado por 7 dias.");
 		}
 	}
-	
+
+
+
 	/* -------- funções getters e setters -------- */
-	
+
+	public List<Comprovante> getHistorico() {
+		return this.historico;
+	}
+
+	public void setHistorico(final List<Comprovante> historico) {
+		this.historico = historico;
+	}
+
 	public String getNome() {
-		return Nome;
+		return this.nome;
 	}
-	public void setNome(String newNome) {
-		this.Nome = newNome;
+
+	public void setNome(final String nome) {
+		this.nome = nome;
 	}
+
 	public String getSobrenome() {
-		return Sobrenome;
+		return this.sobrenome;
 	}
-	public void setSobrenome(String newSobrenome) {
-		this.Sobrenome = newSobrenome;
+
+	public void setSobrenome(final String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
-	public String getEmail() {
-		return Email;
+
+	public int getiD() {
+		return this.iD;
 	}
-	public void setEmail(String newEmail) {
-		this.Email = newEmail;
+
+	public void setiD(final int iD) {
+		this.iD = iD;
 	}
-	public static int getiD() {
-		return iD;
+
+	public int getSenha() {
+		return this.senha;
 	}
-	public void setiD(int iD) {
-		Usuario.iD = iD;
+
+	public void setSenha(final int senha) {
+		this.senha = senha;
 	}
-	public static int getSenha() {
-		return senha;
+
+	public static int getiDUniversal() {
+		return Usuario.iDUniversal;
 	}
-	public void setSenha(int senha) {
-		Usuario.senha = senha;
+
+	public static void setiDUniversal(final int iDUniversal) {
+		Usuario.iDUniversal = iDUniversal;
 	}
-	public static List<Comprovante> getHistorico() {
-		return historico;
+
+	public int getQtdMax() {
+		return this.qtdMax;
 	}
-	public static void setHistorico(List<Comprovante> historico) {
-		Usuario.historico = historico;
+
+	public void setQtdMax(final int qtdMax) {
+		this.qtdMax = qtdMax;
+	}
+
+	public int getPrazoMax() {
+		return this.prazoMax;
+	}
+
+	public void setPrazoMax(final int prazoMax) {
+		this.prazoMax = prazoMax;
+	}
+
+	public LocalDate getDataEmprestimo() {
+		return this.dataEmprestimo;
+	}
+
+	public void setDataEmprestimo(final LocalDate dataEmprestimo) {
+		this.dataEmprestimo = dataEmprestimo;
+	}
+
+	public LocalDate getDataPrevista() {
+		return this.dataPrevista;
+	}
+
+	public void setDataPrevista(final LocalDate dataPrevista) {
+		this.dataPrevista = dataPrevista;
+	}
+
+	public LocalDate getDataDevolucao() {
+		return this.dataDevolucao;
+	}
+
+	public void setDataDevolucao(final LocalDate dataDevolucao) {
+		this.dataDevolucao = dataDevolucao;
 	}
 }
