@@ -18,7 +18,6 @@ public class Principal {
 
 		System.out.println("----------	Bem vindo!	----------");
 
-
 		System.out.println("Digite seu iD e senha: \n");
 		iD = scan.nextInt();
 		scan.nextLine();
@@ -33,8 +32,10 @@ public class Principal {
 			type1 = scan.nextInt();
 			switch (type1) {
 			case 1:
+				// instanciamento auxiliar
 				Aluno a = new Aluno();
 				a = biblioteca.buscaAluno(iD, senha);
+					
 				System.out.println("O que você deseja?");
 				System.out.println("1: Procurar livro.\n"
 						+ "2: Verificar meu histórico.\n"
@@ -43,6 +44,7 @@ public class Principal {
 						+ "5: Fazer cadastro.\n"
 						+ "Pressione '0' para sair.");
 				type2 = scan.nextInt();
+					
 				switch (type2) {
 				case 1:
 					System.out.println("Digite o nome do livro a ser procurado. \n");
@@ -73,8 +75,10 @@ public class Principal {
 				}
 				break;
 			case 2:
+				// instanciamento auxiliar
 				Professor p = new Professor();
 				p = biblioteca.buscaProfessor(iD, senha);
+					
 				System.out.println("O que você deseja?");
 				System.out.println("1: Procurar livro.\n"
 						+ "2: Verificar meu histórico.\n"
@@ -83,6 +87,7 @@ public class Principal {
 						+ "5: Fazer cadastro.\n"
 						+ "Pressione '0' para sair.");
 				type2 = scan.nextInt();
+					
 				switch (type2) {
 				case 1:
 					System.out.println("Digite o nome do livro a ser procurado.\n");
@@ -113,14 +118,17 @@ public class Principal {
 				}
 				break;
 			case 3:
+				// instanciamento auxiliar
 				Bibliotecario b = new Bibliotecario();
 				b = biblioteca.buscaTA(iD, senha);
+					
 				System.out.println("O que você deseja?");
 				System.out.println("1: Procurar livro.\n"
 						+ "2: Cadastrar livro.\n"
 						+ "3: Remover livro.\n"
 						+ "Pressione '0' para sair.");
 				type2 = scan.nextInt();
+					
 				switch (type2) {
 				case 1:
 					System.out.println("Digite o nome do livro a ser procurado.\n");
