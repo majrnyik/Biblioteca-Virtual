@@ -6,7 +6,7 @@ import biblioteca.Biblioteca;
 import comprovante.Comprovante;
 
 public class Aluno extends Usuario {
-	static Scanner scan = new Scanner(System.in);
+	public static Scanner scan = new Scanner(System.in);
 
 	//construtor da classe aluno
 	public Aluno (final String nome, final String sobrenome, final int senha) {
@@ -23,9 +23,9 @@ public class Aluno extends Usuario {
 	//metodo para o aluno fazer cadastro
 	public void cadastroAluno () {
 		System.out.println("Digite o nome, sobrenome, email e nova senha.");
-		String nome = Biblioteca.scan.nextLine();
-		String sobrenome = Biblioteca.scan.nextLine();
-		int senha = Biblioteca.scan.nextInt();
+		String nome = Aluno.scan.nextLine();
+		String sobrenome = Aluno.scan.nextLine();
+		int senha = Aluno.scan.nextInt();
 		Aluno a = new Aluno(nome, sobrenome, senha);
 		Biblioteca.getUsuarioAluno().add(a);
 	}

@@ -4,7 +4,6 @@ import biblioteca.Biblioteca;
 import usuario.Aluno;
 import usuario.Bibliotecario;
 import usuario.Professor;
-import usuario.Usuario;
 
 public class Principal {
 
@@ -20,10 +19,13 @@ public class Principal {
 		Scanner scan = new Scanner(System.in);
 
 		System.out.println("----------	Bem vindo!	----------");
+
+
 		System.out.println("Digite seu iD e senha: \n");
 		iD = scan.nextInt();
 		scan.nextLine();
 		senha = scan.nextInt();
+
 		System.out.println("Digite seu perfil: ");
 		System.out.println("1: Aluno.\n"
 				+ "2: Professor.\n"
@@ -62,7 +64,7 @@ public class Principal {
 					System.out.println("Digite o nome do livro a ser devolvido.\n");
 					scan.nextLine();
 					titulo = scan.nextLine();
-					Usuario.realizaDevolucao(titulo);
+					a.realizaDevolucao(titulo);
 					break;
 				case 5:
 					a.cadastroAluno();
@@ -101,7 +103,7 @@ public class Principal {
 					System.out.println("Digite o nome do livro a ser devolvido.\n");
 					scan.nextLine();
 					titulo = scan.nextLine();
-					Usuario.realizaDevolucao(titulo);
+					p.realizaDevolucao(titulo);
 					break;
 				case 5:
 					p.cadastraProfessor();

@@ -10,16 +10,17 @@ import comprovante.ComprovanteDevolucao;
 import comprovante.ComprovanteEmprestimo;
 
 public abstract class  Usuario {
-	private List <Comprovante> historico;							// histórico de empéstimos do usuário
-	private String nome; 											// nome do usuario
-	private String sobrenome; 										// sobrenome do usuario
-	private int iD;													// número de identificação do usuário
-	private int senha;												// senha do usuário
-	private static int iDUniversal = 0; 									// variável auxiliar para criação de um iD
-	private int  qtdMax; 													// quantidade máxima de livros para locação por usuário
-	private int prazoMax;													// data máxima que um livro pode ser alugado
-	private LocalDate dataEmprestimo = LocalDate.now();						// calcula o dia de hoje
-	private LocalDate dataPrevista = this.getDataEmprestimo().plusDays(this.getPrazoMax());		// calcula a data de devolução baseado na data atual
+	private List <Comprovante> historico;								// histórico de empéstimos do usuário
+	private String nome; 												// nome do usuario
+	private String sobrenome; 											// sobrenome do usuario
+	private int iD;														// número de identificação do usuário
+	private int senha;													// senha do usuário
+	private static int iDUniversal = 0; 								// variável auxiliar para criação de um iD
+	private int  qtdMax; 												// quantidade máxima de livros para locação por usuário
+	private int prazoMax;												// data máxima que um livro pode ser alugado
+	private LocalDate dataEmprestimo = LocalDate.now();					// calcula o dia de hoje
+	private LocalDate dataPrevista = this.getDataEmprestimo()			// calcula a data de devolução baseado na data atual
+			.plusDays(this.getPrazoMax());
 	private LocalDate dataDevolucao = LocalDate.now();
 
 	//construtor da classe abstrata usuario
@@ -55,29 +56,27 @@ public abstract class  Usuario {
 	}
 
 	// método para realizar a devolução
-	public static void realizaDevolucao (final String titulo) {
+	public void realizaDevolucao (final String titulo) {
 		Biblioteca.devolucao(titulo);
 
 		// resgata datas de empréstimo e previsão de devolução
 		LocalDate emprest = null;
 		LocalDate previsao =  null;
 		for (int i = 0; i < this.getHistorico().size(); i++) {
-			if (Comprovante.getTitulo().equals(titulo))	{
-				emprest = Comprovante.getDataEmprestimo();
-				previsao = Comprovante.getDataPrevista();
+			if (this.getHistorico().get(i).getTitulo().equals(titulo))	{
+				emprest = this.getHistorico().get(i).getDataEmprestimo();
+				previsao = this.getHistorico().get(i).getDataPrevista();
+
+				// se a data de devolução for após a data prevista:
+				if (this.getHistorico().get(i).getDataDevolucao().isAfter(previsao)) {
+					System.out.print("Atenção! Devolução atrasada, você está bloqueado por 7 dias.");
+				}
 			}
 		}
 		// cria comprovante de devolução
 		ComprovanteDevolucao c = new ComprovanteDevolucao(titulo, emprest, previsao);
 		System.out.print(c);
-
-		// se a data de devolução for após a data prevista:
-		if (Usuario.getDataDevolucao().isAfter(previsao)) {
-			System.out.print("Atenção! Devolução atrasada, você está bloqueado por 7 dias.");
-		}
 	}
-
-
 
 	/* -------- funções getters e setters -------- */
 

@@ -15,7 +15,7 @@ public class Professor extends Usuario {
 	static LocalDate dataPrevista = Professor.dataEmprestimo.plusDays(Professor.prazoMax);		// calcula o prazo de devolução
 	static LocalDate dataDevolucao = LocalDate.now();						// calcula a data de devolução baseado na data atual
 
-	static Scanner scan = new Scanner(System.in);
+	public static Scanner scan = new Scanner(System.in);
 
 	//construtor da classe professor
 	public Professor (final String nome, final String sobrenome, final int senha) {
