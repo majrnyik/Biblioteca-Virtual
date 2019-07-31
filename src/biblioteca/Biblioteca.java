@@ -10,10 +10,10 @@ import usuario.Professor;
 
 public class Biblioteca {
 	public static final Scanner scan = new Scanner(System.in);
-	protected static List <Livro> acervo = new ArrayList<>();
-	private static List <Aluno> usuarioAluno = new ArrayList<>();
-	private static List <Professor> usuarioProf = new ArrayList<>();
-	private static List <Bibliotecario> usuarioTA = new ArrayList<>();
+	protected static List <Livro> acervo;
+	private static List <Aluno> usuarioAluno;
+	private static List <Professor> usuarioProf;
+	private static List <Bibliotecario> usuarioTA;
 
 	// construtor da classe biblioteca
 	public Biblioteca () {
@@ -63,14 +63,18 @@ public class Biblioteca {
 	}
 
 	// método para buscar aluno
-	public Aluno buscaAluno (final int iD, final int senha) {
+	public Aluno buscaAluno (final int iD) {
+		Aluno a = new Aluno();
 		for (int i = 0; i < Biblioteca.getUsuarioAluno().size(); i++) {
-			if (Biblioteca.usuarioAluno.get(i).getiD() == iD
-					&& Biblioteca.usuarioAluno.get(i).getSenha() == senha ) {
-				return Biblioteca.usuarioAluno.get(i);
+			if (Biblioteca.usuarioAluno.get(i).getiD() == iD) {
+				a = Biblioteca.usuarioAluno.get(i);
+				System.out.println("deu certo");
+			}
+			else {
+				throw new ArrayIndexOutOfBoundsException ("Usuário não encontrado.");
 			}
 		}
-		throw new ArrayIndexOutOfBoundsException ("Usuário não encontrado.");
+		return a;
 	}
 
 	// método para buscar professor
@@ -123,9 +127,11 @@ public class Biblioteca {
 		String nome = Biblioteca.scan.nextLine();
 		String sobrenome = Biblioteca.scan.nextLine();
 		int iD = Biblioteca.scan.nextInt();
+		Biblioteca.scan.nextLine();
 		int senha = Biblioteca.scan.nextInt();
 		Aluno a = new Aluno(nome, sobrenome, iD, senha);
-		Biblioteca.getUsuarioAluno().add(a);
+		Biblioteca.usuarioAluno.add(a);
+		System.out.println("Cadastro realizado com sucesso!");
 	}
 
 	// metodo para cadastrar um professor
@@ -136,7 +142,8 @@ public class Biblioteca {
 		int iD = Biblioteca.scan.nextInt();
 		int senha = Biblioteca.scan.nextInt();
 		Professor p = new Professor(nome, sobrenome, iD, senha);
-		Biblioteca.getUsuarioProf().add(p);
+		Biblioteca.usuarioProf.add(p);
+		System.out.println("Cadastro realizado com sucesso!");
 	}
 
 	// metodo para cadastrar um professor
@@ -147,7 +154,8 @@ public class Biblioteca {
 		int iD = Biblioteca.scan.nextInt();
 		int senha = Biblioteca.scan.nextInt();
 		Bibliotecario b = new Bibliotecario(nome, sobrenome, iD, senha);
-		Biblioteca.getUsuarioTA().add(b);
+		Biblioteca.usuarioTA.add(b);
+		System.out.println("Cadastro realizado com sucesso!");
 	}
 
 
