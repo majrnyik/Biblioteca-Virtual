@@ -29,7 +29,7 @@ public class Principal {
 		System.out.println("Digite seu perfil: ");
 		System.out.println("1: Aluno.\n"
 				+ "2: Professor.\n"
-				+ "3: Funcionário.");
+				+ "3: FuncionÃ¡rio.");
 
 		while (type2 != 0) {
 			type1 = scan.nextInt();
@@ -37,11 +37,12 @@ public class Principal {
 			case 1:
 				Aluno a = new Aluno();
 				a = biblioteca.buscaAluno(iD, senha);
-				System.out.println("O que você deseja?");
+				System.out.println("O que vocÃª deseja?");
 				System.out.println("1: Procurar livro.\n"
-						+ "2: Verificar meu histórico.\n"
+						+ "2: Verificar meu histÃ³rico.\n"
 						+ "3: Alugar um livro.\n"
-						+ "4: Devolver um livro.\n" + "5: Fazer cadastro.\n"
+						+ "4: Devolver um livro.\n" 
+						+ "5: Fazer cadastro.\n"
 						+ "Pressione '0' para sair.");
 				type2 = scan.nextInt();
 				switch (type2) {
@@ -76,11 +77,12 @@ public class Principal {
 			case 2:
 				Professor p = new Professor();
 				p = biblioteca.buscaProfessor(iD, senha);
-				System.out.println("O que você deseja?");
+				System.out.println("O que vocÃª deseja?");
 				System.out.println("1: Procurar livro.\n"
-						+ "2: Verificar meu histórico.\n"
+						+ "2: Verificar meu histÃ³rico.\n"
 						+ "3: Alugar um livro.\n"
-						+ "4: Devolver um livro.\n" + "5: Fazer cadastro.\n"
+						+ "4: Devolver um livro.\n" 
+						+ "5: Fazer cadastro.\n"
 						+ "Pressione '0' para sair.");
 				type2 = scan.nextInt();
 				switch (type2) {
@@ -115,7 +117,7 @@ public class Principal {
 			case 3:
 				Bibliotecario b = new Bibliotecario();
 				b = biblioteca.buscaTA(iD, senha);
-				System.out.println("O que você deseja?");
+				System.out.println("O que vocÃª deseja?");
 				System.out.println("1: Procurar livro.\n"
 						+ "2: Cadastrar livro.\n"
 						+ "3: Remover livro.\n"
