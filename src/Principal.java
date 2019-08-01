@@ -10,12 +10,12 @@ public class Principal {
 	public static void main(final String[] args) {
 		Biblioteca biblioteca = new Biblioteca();
 
-		// cadastro de usuários
+		// cadastro de usuï¿½rios
 		biblioteca.cadastroAluno("Beatriz", "Farkas", 10, 123);
 		biblioteca.cadastroProfessor("Saul", "Leite", 20, 456);
 		biblioteca.cadastroTA("Vera", "Nagamuta", 30, 789);
 
-		// instanciação auxiliar de usuários
+		// instanciaï¿½ï¿½o auxiliar de usuï¿½rios
 		Aluno a = new Aluno();
 		a = biblioteca.buscaAluno(10, 123);
 		Professor p = new Professor();
@@ -25,31 +25,31 @@ public class Principal {
 
 		// cadastro de livros
 		Biblioteca.cadastraLivro("Dom Casmurro", "Romance", "Machado de Assis", 1899);
-		Biblioteca.cadastraLivro("Iracema", "Romance", "José de Alencar", 1865);
-		Biblioteca.cadastraLivro("O Cortiço", "Romance", "Aluísio Azevedo", 1890);
-		// cadastro de livros por um bibliotecário
+		Biblioteca.cadastraLivro("Iracema", "Romance", "Josï¿½ de Alencar", 1865);
+		Biblioteca.cadastraLivro("O Cortiï¿½o", "Romance", "Aluï¿½sio Azevedo", 1890);
+		// cadastro de livros por um bibliotecï¿½rio
 		b.cadastraLivro("Livro", "assunto", "autor", 1900);
 
-		// remoção de livros por um bibliotecário
+		// remoï¿½ï¿½o de livros por um bibliotecï¿½rio
 		/*b.removeLivro("Livro");*/
 
-		// busca de livros por título
+		// busca de livros por tï¿½tulo
 		/*System.out.println(biblioteca.buscaLivro("Dom Casmurro"));
 		System.out.println(biblioteca.buscaLivro("Iracema"));
-		System.out.println(biblioteca.buscaLivro("O Cortiço"));
+		System.out.println(biblioteca.buscaLivro("O Cortiï¿½o"));
 		System.out.println(biblioteca.buscaLivro("Livro"));*/
 
-		// busca usuários, para manter a privacidade é necessário informar a senha também
+		// busca usuï¿½rios, para manter a privacidade ï¿½ necessï¿½rio informar a senha tambï¿½m
 		/*System.out.println(biblioteca.buscaAluno(10, 123));
 		System.out.println(biblioteca.buscaProfessor(20, 456));
 		System.out.println(biblioteca.buscaTA(30, 789));*/
 
-		//empréstimo e devolução de livro por um aluno
+		//emprï¿½stimo e devoluï¿½ï¿½o de livro por um aluno
 		a.realizaEmprestimo("Dom Casmurro");
 		a.realizaDevolucao("Dom Casmurro");
 
-		// impressão de histórico PRECISO ADICIONAR NIVEL DE SEGURANÇA AQUI --> COLOCAR ID E SENHA P ACESSAR
-		System.out.println(p.getHistorico());
+		// impressï¿½o de histï¿½rico PRECISO ADICIONAR NIVEL DE SEGURANï¿½A AQUI --> COLOCAR ID E SENHA P ACESSAR
+		p.solicitaHistorico();
 
 	}
 }

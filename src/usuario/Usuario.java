@@ -8,17 +8,18 @@ import biblioteca.Biblioteca;
 import comprovante.Comprovante;
 import comprovante.ComprovanteDevolucao;
 import comprovante.ComprovanteEmprestimo;
+import java.util.Scanner;
 
 public abstract class  Usuario {
-	private List <Comprovante> historico;								// histórico de empéstimos do usuário
+	private List <Comprovante> historico;								// histï¿½rico de empï¿½stimos do usuï¿½rio
 	private String nome; 												// nome do usuario
 	private String sobrenome; 											// sobrenome do usuario
-	private int iD;														// número de identificação do usuário
-	private int senha;													// senha do usuário
-	private int  qtdMax; 												// quantidade máxima de livros para locação por usuário
-	private int prazoMax;												// data máxima que um livro pode ser alugado
+	private int iD;														// nï¿½mero de identificaï¿½ï¿½o do usuï¿½rio
+	private int senha;													// senha do usuï¿½rio
+	private int  qtdMax; 												// quantidade mï¿½xima de livros para locaï¿½ï¿½o por usuï¿½rio
+	private int prazoMax;												// data mï¿½xima que um livro pode ser alugado
 	private LocalDate dataEmprestimo = LocalDate.now();					// calcula o dia de hoje
-	private LocalDate dataPrevista = this.getDataEmprestimo()			// calcula a data de devolução baseado na data atual
+	private LocalDate dataPrevista = this.getDataEmprestimo()			// calcula a data de devoluï¿½ï¿½o baseado na data atual
 			.plusDays(this.getPrazoMax());
 	private LocalDate dataDevolucao = LocalDate.now();
 
@@ -35,9 +36,9 @@ public abstract class  Usuario {
 
 	}
 
-	// método para realizar empréstimo
+	// mï¿½todo para realizar emprï¿½stimo
 	public void realizaEmprestimo (final String titulo) {
-		// se o limite de livros ainda não for atigido
+		// se o limite de livros ainda nï¿½o for atigido
 		if (this.getQtdMax() > 0) {
 			// se o livro estiver disponivel
 			Biblioteca.emprestimo(titulo);
@@ -50,20 +51,20 @@ public abstract class  Usuario {
 			ComprovanteEmprestimo c = new ComprovanteEmprestimo (titulo, LocalDate.now(),
 					LocalDate.now().plusDays(this.getPrazoMax()));
 			System.out.print(c);
-			// diminui em 1 a quantidade possíveis futuros empréstimos
+			// diminui em 1 a quantidade possï¿½veis futuros emprï¿½stimos
 			int qtdNova = this.getQtdMax();
 			this.setQtdMax(qtdNova);
 		} else {
-			System.out.println("Você atingiu o limite para a locação de livros.\n "
+			System.out.println("Vocï¿½ atingiu o limite para a locaï¿½ï¿½o de livros.\n "
 					+ "Devolva um livro e tente novamente");
 		}
 	}
 
-	// método para realizar a devolução
+	// mï¿½todo para realizar a devoluï¿½ï¿½o
 	public void realizaDevolucao (final String titulo) {
 		Biblioteca.devolucao(titulo);
 
-		// resgata datas de empréstimo e previsão de devolução
+		// resgata datas de emprï¿½stimo e previsï¿½o de devoluï¿½ï¿½o
 		for (int i = 0; i < this.getHistorico().size(); i++) {
 			if (this.getHistorico().get(i).getTitulo().equals(titulo))	{
 				LocalDate emprest = this.getHistorico().get(i).getDataEmprestimo();
@@ -71,9 +72,9 @@ public abstract class  Usuario {
 				this.getHistorico().get(i).setDataDevolucao(LocalDate.now());
 				ComprovanteDevolucao c = new ComprovanteDevolucao(titulo, emprest, previsao);
 				System.out.print(c);
-				// se a data de devolução for após a data prevista:
+				// se a data de devoluï¿½ï¿½o for apï¿½s a data prevista:
 				if (this.getHistorico().get(i).getDataDevolucao().isAfter(previsao)) {
-					System.out.print("Atenção! Devolução atrasada, você está bloqueado por 7 dias.");
+					System.out.print("Atenï¿½ï¿½o! Devoluï¿½ï¿½o atrasada, vocï¿½ estï¿½ bloqueado por 7 dias.");
 				}
 			}
 		}
@@ -84,10 +85,35 @@ public abstract class  Usuario {
 		return "Nome: " + this.getNome() + " " + this.getSobrenome() + "\n"
 				+ "iD: " + this.getiD();
 	}
+	public void solicitaHistorico() {
+		Scanner scan =  new Scanner(System.in);
+		System.out.print("ID: ");
+		int scan_id = scan.nextInt();
+		System.out.print("Senha: ");
+		int scan_pass = scan.nextInt();
+		
+		if (scan_id == this.getiD() && scan_pass == this.getSenha()) {
+			System.out.println(this.getHistorico());
+		}else {
+			System.out.println("ID ou senha incorreta! ");
+			System.out.println("Deseja digitar a senha novamente?");
+			System.out.println("1-Sim");
+			System.out.println("2-nao");
+			int menu= scan.nextInt();
+			switch(menu){
+			
+			case 1:
+				solicitaHistorico();
+			case 2: break;
+			}
+		
+		}
+		scan.close();
+	}
 
-	/* -------- funções getters e setters -------- */
+	/* -------- funï¿½ï¿½es getters e setters -------- */
 
-	public List<Comprovante> getHistorico() {
+	protected List<Comprovante> getHistorico() {
 		return this.historico;
 	}
 
