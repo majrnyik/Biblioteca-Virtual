@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 import biblioteca.Biblioteca;
 import usuario.Aluno;
 import usuario.Bibliotecario;
@@ -10,180 +8,49 @@ public class Principal {
 
 
 	public static void main(final String[] args) {
-		int type1;
-		int type2 = 10;
-		int type3;
-		int iD;
-		int senha;
-		String titulo;
 		Biblioteca biblioteca = new Biblioteca();
-		Scanner scan = new Scanner(System.in);
 
-		System.out.println("----------	Bem vindo!	----------");
+		// cadastro de usuários
+		biblioteca.cadastroAluno("Beatriz", "Farkas", 10, 123);
+		biblioteca.cadastroProfessor("Saul", "Leite", 20, 456);
+		biblioteca.cadastroTA("Vera", "Nagamuta", 30, 789);
 
+		// instanciação auxiliar de usuários
+		Aluno a = new Aluno();
+		a = biblioteca.buscaAluno(10, 123);
+		Professor p = new Professor();
+		p = biblioteca.buscaProfessor(20, 456);
+		Bibliotecario b = new Bibliotecario();
+		b = biblioteca.buscaTA(30, 789);
 
-		System.out.println("Digite seu perfil: ");
-		System.out.println("1: Aluno.\n"
-				+ "2: Professor.\n"
-				+ "3: Funcionário.");
-		type1 = scan.nextInt();
+		// cadastro de livros
+		Biblioteca.cadastraLivro("Dom Casmurro", "Romance", "Machado de Assis", 1899);
+		Biblioteca.cadastraLivro("Iracema", "Romance", "José de Alencar", 1865);
+		Biblioteca.cadastraLivro("O Cortiço", "Romance", "Aluísio Azevedo", 1890);
+		// cadastro de livros por um bibliotecário
+		b.cadastraLivro("Livro", "assunto", "autor", 1900);
 
-		switch (type1) {
-		case 1:
+		// remoção de livros por um bibliotecário
+		/*b.removeLivro("Livro");*/
 
-			System.out.println("Você já está cadastrado?\n"
-					+ "1. Sim.\n"
-					+ "2. Não.\n");
-			type3 = scan.nextInt();
-			// se ainda não estiver cadastrado, cria cadastro
-			if (type3 == 2) {
-				biblioteca.cadastroAluno();
-			}
-			System.out.println("Digite seu iD e senha: \n");
-			iD = scan.nextInt();
-			scan.nextLine();
+		// busca de livros por título
+		/*System.out.println(biblioteca.buscaLivro("Dom Casmurro"));
+		System.out.println(biblioteca.buscaLivro("Iracema"));
+		System.out.println(biblioteca.buscaLivro("O Cortiço"));
+		System.out.println(biblioteca.buscaLivro("Livro"));*/
 
-			Aluno a = new Aluno();
-			a = biblioteca.buscaAluno(iD);
+		// busca usuários, para manter a privacidade é necessário informar a senha também
+		/*System.out.println(biblioteca.buscaAluno(10, 123));
+		System.out.println(biblioteca.buscaProfessor(20, 456));
+		System.out.println(biblioteca.buscaTA(30, 789));*/
 
-			System.out.println("O que você deseja?");
-			System.out.println("1: Procurar livro.\n"
-					+ "2: Verificar meu histórico.\n"
-					+ "3: Alugar um livro.\n"
-					+ "4: Devolver um livro.\n"
-					+ "Pressione '0' para sair.");
-			type2 = scan.nextInt();
+		//empréstimo e devolução de livro por um aluno
+		a.realizaEmprestimo("Dom Casmurro");
+		a.realizaDevolucao("Dom Casmurro");
 
-			while (type2 != 0) {
-				switch (type2) {
-				case 1:
-					System.out.println("Digite o nome do livro a ser procurado. \n");
-					scan.nextLine();
-					titulo = scan.nextLine();
-					biblioteca.buscaLivro(titulo);
-					break;
-				case 2:
-					System.out.println(a.getHistorico());
-					break;
-				case 3:
-					System.out.println("Digite o nome do livro a ser alugado.\n");
-					scan.nextLine();
-					titulo = scan.nextLine();
-					a.realizaEmprestimo(titulo);
-					break;
-				case 4:
-					System.out.println("Digite o nome do livro a ser devolvido.\n");
-					scan.nextLine();
-					titulo = scan.nextLine();
-					a.realizaDevolucao(titulo);
-					break;
-				default:
-					return;
-				}
-			}
-			break;
-		case 2:
+		// impressão de histórico PRECISO ADICIONAR NIVEL DE SEGURANÇA AQUI --> COLOCAR ID E SENHA P ACESSAR
+		System.out.println(p.getHistorico());
 
-			System.out.println("Você já está cadastrado?\n"
-					+ "1. Sim.\n"
-					+ "2. Não.\n");
-			type3 = scan.nextInt();
-			// se ainda não estiver cadastrado, cria cadastro
-			if (type3 == 2) {
-				biblioteca.cadastroProfessor();
-			}
-
-			System.out.println("Digite seu iD e senha: \n");
-			iD = scan.nextInt();
-			scan.nextLine();
-			senha = scan.nextInt();
-
-			Professor p = new Professor();
-			p = biblioteca.buscaProfessor(iD, senha);
-
-			System.out.println("O que você deseja?");
-			System.out.println("1: Procurar livro.\n"
-					+ "2: Verificar meu histórico.\n"
-					+ "3: Alugar um livro.\n"
-					+ "4: Devolver um livro.\n"
-					+ "Pressione '0' para sair.");
-			type2 = scan.nextInt();
-			while (type2 != 0) {
-				switch (type2) {
-				case 1:
-					System.out.println("Digite o nome do livro a ser procurado.\n");
-					scan.nextLine();
-					titulo = scan.nextLine();
-					biblioteca.buscaLivro(titulo);
-					break;
-				case 2:
-					System.out.println(p.getHistorico());
-					break;
-				case 3:
-					System.out.println("Digite o nome do livro a ser alugado.\n");
-					scan.nextLine();
-					titulo = scan.nextLine();
-					p.realizaEmprestimo(titulo);
-					break;
-				case 4:
-					System.out.println("Digite o nome do livro a ser devolvido.\n");
-					scan.nextLine();
-					titulo = scan.nextLine();
-					p.realizaDevolucao(titulo);
-					break;
-				default:
-					return;
-				}
-			}
-			break;
-		case 3:
-
-			System.out.println("Você já está cadastrado?\n"
-					+ "1. Sim.\n"
-					+ "2. Não.\n");
-			type3 = scan.nextInt();
-			// se ainda não estiver cadastrado, cria cadastro
-			if (type3 == 2) {
-				biblioteca.cadastroTA();
-			}
-			System.out.println("Digite seu iD e senha: \n");
-			iD = scan.nextInt();
-			scan.nextLine();
-			senha = scan.nextInt();
-			Bibliotecario b = new Bibliotecario();
-			b = biblioteca.buscaTA(iD, senha);
-			System.out.println("O que você deseja?");
-			System.out.println("1: Procurar livro.\n"
-					+ "2: Cadastrar livro.\n"
-					+ "3: Remover livro.\n"
-					+ "Pressione '0' para sair.");
-			type2 = scan.nextInt();
-			while (type2 != 0) {
-				switch (type2) {
-				case 1:
-					System.out.println("Digite o nome do livro a ser procurado.\n");
-					scan.nextLine();
-					titulo = scan.nextLine();
-					biblioteca.buscaLivro(titulo);
-					break;
-				case 2:
-					b.cadastraLivro();
-					break;
-				case 3:
-					System.out.println("Digite o nome do livro a ser removido.\n");
-					scan.nextLine();
-					titulo = scan.nextLine();
-					b.removeLivro(titulo);
-					break;
-				default:
-					return;
-				}
-			}
-			break;
-		default:
-			return;
-		}
 	}
-
 }
 

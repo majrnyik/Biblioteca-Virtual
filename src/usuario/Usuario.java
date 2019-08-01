@@ -41,9 +41,14 @@ public abstract class  Usuario {
 		if (this.getQtdMax() > 0) {
 			// se o livro estiver disponivel
 			Biblioteca.emprestimo(titulo);
-			// cria comprovante de empréstimo e coloca no histórico do usuário
-			ComprovanteEmprestimo c = new ComprovanteEmprestimo (titulo, this.getDataEmprestimo(), this.getDataPrevista());
-			this.getHistorico().add(c);
+			// cria comprovante e adiciona ao historico
+			Comprovante comp = new Comprovante (titulo, LocalDate.now(),
+					LocalDate.now().plusDays(this.getPrazoMax()),
+					LocalDate.now().plusDays(this.getPrazoMax()));
+			this.getHistorico().add(comp);
+			// cria comprovante de emprestimo
+			ComprovanteEmprestimo c = new ComprovanteEmprestimo (titulo, LocalDate.now(),
+					LocalDate.now().plusDays(this.getPrazoMax()));
 			System.out.print(c);
 			// diminui em 1 a quantidade possíveis futuros empréstimos
 			int qtdNova = this.getQtdMax();
@@ -59,22 +64,25 @@ public abstract class  Usuario {
 		Biblioteca.devolucao(titulo);
 
 		// resgata datas de empréstimo e previsão de devolução
-		LocalDate emprest = null;
-		LocalDate previsao =  null;
 		for (int i = 0; i < this.getHistorico().size(); i++) {
 			if (this.getHistorico().get(i).getTitulo().equals(titulo))	{
-				emprest = this.getHistorico().get(i).getDataEmprestimo();
-				previsao = this.getHistorico().get(i).getDataPrevista();
-
+				LocalDate emprest = this.getHistorico().get(i).getDataEmprestimo();
+				LocalDate previsao = this.getHistorico().get(i).getDataPrevista();
+				this.getHistorico().get(i).setDataDevolucao(LocalDate.now());
+				ComprovanteDevolucao c = new ComprovanteDevolucao(titulo, emprest, previsao);
+				System.out.print(c);
 				// se a data de devolução for após a data prevista:
 				if (this.getHistorico().get(i).getDataDevolucao().isAfter(previsao)) {
 					System.out.print("Atenção! Devolução atrasada, você está bloqueado por 7 dias.");
 				}
 			}
 		}
-		// cria comprovante de devolução
-		ComprovanteDevolucao c = new ComprovanteDevolucao(titulo, emprest, previsao);
-		System.out.print(c);
+	}
+
+	@Override
+	public String toString () {
+		return "Nome: " + this.getNome() + " " + this.getSobrenome() + "\n"
+				+ "iD: " + this.getiD();
 	}
 
 	/* -------- funções getters e setters -------- */

@@ -28,8 +28,10 @@ public class Biblioteca {
 		for (int i = 0; i < Biblioteca.acervo.size(); i++) {
 			if (Biblioteca.acervo.get(i).getTitulo().equals(title) && Biblioteca.acervo.get(i).getStatus() == 0) {
 				Biblioteca.acervo.get(i).setStatus(1);
+				return;
 			}
 		}
+		throw new ArrayIndexOutOfBoundsException ("Livro não disponível.");
 	}
 
 	// metodo auxiliar para realizar uma devolução
@@ -63,18 +65,13 @@ public class Biblioteca {
 	}
 
 	// método para buscar aluno
-	public Aluno buscaAluno (final int iD) {
-		Aluno a = new Aluno();
+	public Aluno buscaAluno (final int iD, final int senha) {
 		for (int i = 0; i < Biblioteca.getUsuarioAluno().size(); i++) {
-			if (Biblioteca.usuarioAluno.get(i).getiD() == iD) {
-				a = Biblioteca.usuarioAluno.get(i);
-				System.out.println("deu certo");
-			}
-			else {
-				throw new ArrayIndexOutOfBoundsException ("Usuário não encontrado.");
+			if (Biblioteca.usuarioAluno.get(i).getiD() == iD && Biblioteca.usuarioAluno.get(i).getSenha() == senha) {
+				return Biblioteca.usuarioAluno.get(i);
 			}
 		}
-		return a;
+		throw new ArrayIndexOutOfBoundsException ("Usuário não encontrado.");
 	}
 
 	// método para buscar professor
@@ -101,12 +98,7 @@ public class Biblioteca {
 
 
 	// método para cadastrar livro
-	public static void cadastraLivro () {
-		System.out.println("Digite o título, assunto, autores e ano do livro.");
-		String titulo = Biblioteca.scan.nextLine();
-		String assunto = Biblioteca.scan.nextLine();
-		String autor = Biblioteca.scan.nextLine();
-		int ano = Biblioteca.scan.nextInt();
+	public static void cadastraLivro (final String titulo, final String assunto, final String autor, final int ano) {
 		Livro l = new Livro(titulo, assunto, autor, ano);
 		Biblioteca.acervo.add(l);
 		System.out.println("Livro cadastrado com sucesso!");
@@ -122,37 +114,21 @@ public class Biblioteca {
 	}
 
 	//metodo para o aluno fazer cadastro
-	public void cadastroAluno () {
-		System.out.println("Digite o nome, sobrenome, iD e nova senha.");
-		String nome = Biblioteca.scan.nextLine();
-		String sobrenome = Biblioteca.scan.nextLine();
-		int iD = Biblioteca.scan.nextInt();
-		Biblioteca.scan.nextLine();
-		int senha = Biblioteca.scan.nextInt();
+	public void cadastroAluno (final String nome, final String sobrenome, final int iD, final int senha) {
 		Aluno a = new Aluno(nome, sobrenome, iD, senha);
 		Biblioteca.usuarioAluno.add(a);
 		System.out.println("Cadastro realizado com sucesso!");
 	}
 
 	// metodo para cadastrar um professor
-	public void cadastroProfessor () {
-		System.out.println("Digite o nome, sobrenome, iD e nova senha.");
-		String nome = Biblioteca.scan.nextLine();
-		String sobrenome = Biblioteca.scan.nextLine();
-		int iD = Biblioteca.scan.nextInt();
-		int senha = Biblioteca.scan.nextInt();
+	public void cadastroProfessor (final String nome, final String sobrenome, final int iD, final int senha) {
 		Professor p = new Professor(nome, sobrenome, iD, senha);
 		Biblioteca.usuarioProf.add(p);
 		System.out.println("Cadastro realizado com sucesso!");
 	}
 
 	// metodo para cadastrar um professor
-	public void cadastroTA () {
-		System.out.println("Digite o nome, sobrenome, iD e nova senha.");
-		String nome = Biblioteca.scan.nextLine();
-		String sobrenome = Biblioteca.scan.nextLine();
-		int iD = Biblioteca.scan.nextInt();
-		int senha = Biblioteca.scan.nextInt();
+	public void cadastroTA (final String nome, final String sobrenome, final int iD, final int senha) {
 		Bibliotecario b = new Bibliotecario(nome, sobrenome, iD, senha);
 		Biblioteca.usuarioTA.add(b);
 		System.out.println("Cadastro realizado com sucesso!");

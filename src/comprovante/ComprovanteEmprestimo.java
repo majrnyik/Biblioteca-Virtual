@@ -10,7 +10,7 @@ public class ComprovanteEmprestimo extends Comprovante {
 
 	@Override
 	public String toString () {
-		return "---------- Empréstimo realizado com sucessso! ----------"
+		return "---------- Empréstimo realizado com sucessso! ----------\n"
 				+ "Título:  " + this.getTitulo() + "\n"
 				+ "Data de empréstimo: " + this.getDataEmprestimo() + "\n"
 				+ "Prazo de devolução: " + this.getDataPrevista() + "\n";

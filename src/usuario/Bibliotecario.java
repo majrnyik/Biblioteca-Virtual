@@ -17,8 +17,8 @@ public class Bibliotecario extends Usuario {
 	}
 
 	// método para cadastrar livro
-	public void cadastraLivro () {
-		Biblioteca.cadastraLivro();
+	public void cadastraLivro (final String titulo, final String assunto, final String autor, final int ano) {
+		Biblioteca.cadastraLivro(titulo, assunto, autor, ano);
 	}
 
 	//método para remover um livro
