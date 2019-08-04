@@ -1,19 +1,89 @@
 package usuario;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-public class Aluno extends Usuario implements Emprestimo {
-	//aluno pode alugar até 5 livros com prazo de 30 dias
-	int limite_livros = 5;
-	int prazoMax = 30;
-	
-	//construtor da classe aluno 
-	public Aluno (String nome, String sobrenome, String email, int id, int senha) {
-		super (nome, sobrenome, email, id, senha);
+import biblioteca.Biblioteca;
+import comprovante.Comprovante;
+import comprovante.ComprovanteDevolucao;
+import comprovante.ComprovanteEmprestimo;
+
+public class Aluno extends Usuario {
+	public static final Scanner scan = new Scanner(System.in);
+
+	//construtor da classe aluno
+	public Aluno (final String nome, final String sobrenome, final int iD, final int senha) {
+		super (nome, sobrenome, iD, senha);
+		this.setHistorico(new ArrayList<Comprovante>());
+		this.setQtdMax(5);
+		this.setPrazoMax(30);
 	}
-	public void realizaEmprestimo () {
-		
+
+	public Aluno () {
+
 	}
-	
-	public void realizaDevolucao () {
-		
+
+	// método para realizar empréstimo
+	@Override
+	public void realizaEmprestimo (final String titulo) {
+		// se o limite de livros ainda não for atigido
+		if (this.getQtdMax() > 0) {
+
+			// se o livro estiver disponível faz o empréstimo
+			Biblioteca.emprestimo(titulo);
+
+			// cria comprovante e adiciona ao histórico
+			Comprovante comp = new Comprovante (titulo, LocalDate.now(), LocalDate.now().plusDays(this.getPrazoMax()), LocalDate.now().plusDays(this.getPrazoMax()));
+			this.getHistorico().add(comp);
+
+			// cria comprovante de empréstimo
+			ComprovanteEmprestimo c = new ComprovanteEmprestimo (titulo, LocalDate.now(), LocalDate.now().plusDays(this.getPrazoMax()));
+			System.out.print(c);
+
+			// diminui em 1 a quantidade possíveis futuros empréstimos
+			this.setQtdMax(this.getQtdMax()-1);
+		} else {
+			System.out.println("Você atingiu o limite para a locação de livros.\n "
+					+ "Devolva um livro e tente novamente");
+		}
+	}
+
+	// método para realizar a devolução
+	@Override
+	public void realizaDevolucao (final String titulo) {
+		//realiza a devolução
+		Biblioteca.devolucao(titulo);
+
+		// resgata datas de empréstimo e previsão de devolução
+		for (int i = 0; i < this.getHistorico().size(); i++) {
+			if (this.getHistorico().get(i).getTitulo().equals(titulo))	{
+
+				LocalDate emprest = this.getHistorico().get(i).getDataEmprestimo();
+				LocalDate previsao = this.getHistorico().get(i).getDataPrevista();
+
+				// altera a data de devolução para o dia de hoje
+				this.getHistorico().get(i).setDataDevolucao(LocalDate.now());
+
+				// cria um comprovante de devolução e o imprime
+				ComprovanteDevolucao c = new ComprovanteDevolucao(titulo, emprest, LocalDate.now());
+				System.out.print(c);
+
+				// se a data de devolução for após a data prevista:
+				if (this.getHistorico().get(i).getDataDevolucao().isAfter(previsao)) {
+					System.out.print("Atenção! Devolução atrasada, você está bloqueado por 7 dias.");
+				}
+			}
+		}
+	}
+
+	// método para solicitar o histórico
+	public List <Comprovante> solicitaHistorico (final int iD, final int senha) {
+		if (Biblioteca.verificaAluno(iD, senha)) {
+			return this.getHistorico();
+		}
+		else {
+			throw new ArrayIndexOutOfBoundsException ("Usuário não encontrado ou iD e senha errados.");
+		}
 	}
 }

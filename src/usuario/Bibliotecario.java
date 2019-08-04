@@ -1,56 +1,28 @@
 package usuario;
+import java.util.Scanner;
 
-public class Bibliotecario extends Usuario implements Emprestimo, Cadastro {
-	
+import biblioteca.Biblioteca;
+
+public class Bibliotecario extends Usuario {
+
+	static Scanner scan = new Scanner(System.in);
+
 	//construtor da classe bibliotecario
-	public Bibliotecario (String nome, String sobrenome, String email, int id, int senha) {
-		super (nome, sobrenome, email, id, senha);
+	public Bibliotecario (final String nome, final String sobrenome, final int iD, final int senha) {
+		super (nome, sobrenome, iD, senha);
 	}
-	
-	//metodo para cadastrar usuario 
-	//AINDA NAO TESTEI E NEM TA COMPLETO KKKKJ
-	public void cadastraUsuario () {
-		String tipo = "";
-		Usuario user;
-		switch (tipo) {
-			case "Aluno": 
-				user = new Aluno (getNome(), getSobrenome(), getEmail(), getiD(), getSenha());
-				break;
-			case "Professor": 
-				user = new Professor (getNome(), getSobrenome(), getEmail(), getiD(), getSenha());
-				break;
-		}
-			
+
+	public Bibliotecario () {
+
 	}
-	
+
+	// método para cadastrar livro
 	public void cadastraLivro () {
-		
+		Biblioteca.cadastraLivro();
 	}
-	
-	public void removeCadastroUsuario () {
-		
-	}
-	
-	public void removeCadastroLivro () {
-		
-	}
-	
-	public void realizaEmprestimoFisico () {
-		
-	}
-	
-	public void realizaEmprestimoOnline () {
-		
-	}
-	
-	public void realizaDevolucao () {
-		
-	}	
-	
-	//metodo para ver o histórico de emprestimos de um usuario
-	//ainda não sei se deixo aqui ou não
-	//apenas bibliotecario tem acesso ao historico???
-	public void verificaHistorico () {
-		
+
+	//método para remover um livro
+	public void removeLivro (final String title) {
+		Biblioteca.removeLivro(title);
 	}
 }
